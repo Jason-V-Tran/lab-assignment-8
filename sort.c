@@ -40,6 +40,8 @@ void heapSort(int arr[], int n)
     }
 }
 
+
+
 // implement merge sort
 // extraMemoryAllocated counts bytes of extra memory allocated
 void merge(int pData[], int l, int m, int r)
@@ -101,6 +103,7 @@ void mergeSort(int pData[], int l, int r)
     }
 }
 
+
 // parses input file to an integer array
 int parseData(char *inputFileName, int **ppData)
 {
@@ -108,7 +111,7 @@ int parseData(char *inputFileName, int **ppData)
 	int dataSz = 0;
 	int i, n, *data;
 	*ppData = NULL;
-	
+
 	if (inFile)
 	{
 		fscanf(inFile,"%d\n",&dataSz);
@@ -128,7 +131,7 @@ int parseData(char *inputFileName, int **ppData)
 
 		fclose(inFile);
 	}
-	
+
 	return dataSz;
 }
 
@@ -139,10 +142,10 @@ void printArray(int pData[], int dataSz)
 	printf("\tData:\n\t");
 	for (i=0;i<100;++i)
 	{
-		if(i >= dataSz)
+	   	if(i >= dataSz)
         	{
             		printf("\n\n");
-        		return;
+            		return;
         	}
 		printf("%d ",pData[i]);
 	}
@@ -159,23 +162,23 @@ int main(void)
 {
 	clock_t start, end;
 	int i;
-    double cpu_time_used;
+    	double cpu_time_used;
 	char* fileNames[] = { "input1.txt", "input2.txt", "input3.txt", "input4.txt" };
-	
+
 	for (i=0;i<4;++i)
 	{
 		int *pDataSrc, *pDataCopy;
 		int dataSz = parseData(fileNames[i], &pDataSrc);
-		
+
 		if (dataSz <= 0)
 			continue;
-		
+
 		pDataCopy = (int *)malloc(sizeof(int)*dataSz);
-	
+
 		printf("---------------------------\n");
 		printf("Dataset Size : %d\n",dataSz);
 		printf("---------------------------\n");
-		
+
 		printf("Heap Sort:\n");
 		memcpy(pDataCopy, pDataSrc, dataSz*sizeof(int));
 		extraMemoryAllocated = 0;
@@ -186,7 +189,7 @@ int main(void)
 		printf("\truntime\t\t\t: %.1lf\n",cpu_time_used);
 		printf("\textra memory allocated\t: %d\n",extraMemoryAllocated);
 		printArray(pDataCopy, dataSz);
-		
+
 		printf("Merge Sort:\n");
 		memcpy(pDataCopy, pDataSrc, dataSz*sizeof(int));
 		extraMemoryAllocated = 0;
@@ -197,9 +200,9 @@ int main(void)
 		printf("\truntime\t\t\t: %.1lf\n",cpu_time_used);
 		printf("\textra memory allocated\t: %d\n",extraMemoryAllocated);
 		printArray(pDataCopy, dataSz);
-		
+
 		free(pDataCopy);
 		free(pDataSrc);
 	}
-	
+
 }
